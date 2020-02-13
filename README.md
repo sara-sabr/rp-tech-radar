@@ -1,6 +1,6 @@
 # R&P Technology Radar
 
-`[R&P Technology Radar](https://sara-sabr.github.io/rp-tech-radar/)`
+[R&P Technology Radar](https://sara-sabr.github.io/rp-tech-radar/)
 
 This radar has been adapted from the open sourced [Zalando Tech Radar](http://zalando.github.io/tech-radar/). 
 It is based on the [pioneering work by ThoughtWorks](https://www.thoughtworks.com/radar).
