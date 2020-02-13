@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*----- Custom CSS -----*/
+
+ /* Style the button that is used to open and close the collapsible content */
+.collapsible {
+/*
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+*/
+  	width: 100%;
+	text-align: left;
+	padding: 15px 20px 15px 20px;
+	font-size: 1.4rem;
+  	font-weight:bold;
+	margin: 10px 0 0 0;
+	color:#0072c1;
+}
+.collapsible::after {
+	
+	font-family: "Font Awesome 5 Free"; 
+	content: "\f056";
+	font-size: 1.4rem;
+	float: right;
+	color: #0072c1;
+}
+.collapsible.collapsed:after {
+	font-family: "Font Awesome 5 Free"; 
+	content: "\f055";
+	font-size: 1.4rem;
+	color: #0072c1;
+	float: right;
+	margin-left: 5px;
+	border: none;
+}
+.collapsible:hover:after, .collapsible:hover{
+	color: #ff8500;
+}
+.collapsible:focus, .collapsible:focus:after{
+	color: #ff8500;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0px 0px 0 0px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+	text-align: left;
+	
+}
+.contentText
+{
+	padding: 10px 20px 0px 20px;
+}
+.accodion-content
+{
+	/*
+	border: 0.125rem solid rgba(0, 0, 0, 0.125);
+	border-radius: 8px;
+	*/
+	margin: 24px;
+	color: #11181f;	
+}
+
+.lead-noWeight {
+	font-size: 1.25rem;
+  }
+
+.grid-card{
+	background-color: white;
+	/*border: 1px solid #0072c1;*/
+	border-radius: 8px;
+	box-shadow: 0 2px 4px 0px #b7b7b7;
+	text-align: center;
+}
+.grid-card-header{
+	background-color:#0072c1;
+	padding: 20px 30px 20px 30px;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	font-size: 30px;
+	font-weight: 200;
+	color: white;
+}
+.grid-card-body{
+	background-color: white;
+	padding: 20px 30px 20px 30px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+
+
+
+
+/*----- /Custom CSS -----*/
+

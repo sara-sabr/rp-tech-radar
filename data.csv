@@ -1,0 +1,17 @@
+name,ring,quadrant,category,moved,link
+Item,PILOT,Research,Frameworks,none,https://www.wikipedia.org
+Item,EVALUATE,Emerging Technologies,Platforms,up,https://www.google.ca
+Item,DISCOVER,Technology Prototyping,Frameworks,none,https://www.wikipedia.org
+Item,WATCH,Solution Prototyping,Tools and Practices,none,https://www.google.ca
+Item,WATCH,Research,Tools and Practices,down,https://www.wikipedia.org
+Item,PILOT,Emerging Technologies,Frameworks,none,https://www.google.ca
+Item,EVALUATE,Technology Prototyping,Tools and Practices,none,https://www.wikipedia.org
+Item,DISCOVER,Solution Prototyping,Tools and Practices,up,https://www.google.ca
+Item,DISCOVER,Research,Platforms,none,https://www.wikipedia.org
+Item,WATCH,Emerging Technologies,Frameworks,none,https://www.google.ca
+Item,PILOT,Technology Prototyping,Products,up,https://www.wikipedia.org
+Item,EVALUATE,Solution Prototyping,Tools and Practices,none,https://www.google.ca
+Item,EVALUATE,Research,Tools and Practices,none,https://www.wikipedia.org
+Item,DISCOVER,Emerging Technologies,Products,down,https://www.google.ca
+Item,WATCH,Technology Prototyping,Products,down,https://www.wikipedia.org
+Item,PILOT,Solution Prototyping,Frameworks,none,https://www.google.ca
