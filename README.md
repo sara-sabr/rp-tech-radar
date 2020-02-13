@@ -1,5 +1,7 @@
 # R&P Technology Radar
 
+`[R&P Technology Radar](https://sara-sabr.github.io/rp-tech-radar/)`
+
 This radar has been adapted from the open sourced [Zalando Tech Radar](http://zalando.github.io/tech-radar/). 
 It is based on the [pioneering work by ThoughtWorks](https://www.thoughtworks.com/radar).
 
@@ -8,7 +10,7 @@ This repository contains the code to generate the visualization:
 Feel free to use and adapt it for your own purposes.
 
 As a working example, you can check out `/index.html` &mdash; the source 
-of our [R&P Technology Radar](https://ryanwayca.github.io/rp-tech-radar/).
+of our [R&P Technology Radar](https://sara-sabr.github.io/rp-tech-radar/).
 
 # Modifications
 
