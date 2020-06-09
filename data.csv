@@ -1,17 +1,13 @@
 name,ring,quadrant,category,moved,link
-Item,PILOT,Research,Frameworks,none,https://www.wikipedia.org
-Item,EVALUATE,Emerging Technologies,Platforms,up,https://www.google.ca
-Item,DISCOVER,Technology Prototyping,Frameworks,none,https://www.wikipedia.org
-Item,WATCH,Solution Prototyping,Tools and Practices,none,https://www.google.ca
-Item,WATCH,Research,Tools and Practices,down,https://www.wikipedia.org
-Item,PILOT,Emerging Technologies,Frameworks,none,https://www.google.ca
-Item,EVALUATE,Technology Prototyping,Tools and Practices,none,https://www.wikipedia.org
-Item,DISCOVER,Solution Prototyping,Tools and Practices,up,https://www.google.ca
-Item,DISCOVER,Research,Platforms,none,https://www.wikipedia.org
-Item,WATCH,Emerging Technologies,Frameworks,none,https://www.google.ca
-Item,PILOT,Technology Prototyping,Products,up,https://www.wikipedia.org
-Item,EVALUATE,Solution Prototyping,Tools and Practices,none,https://www.google.ca
-Item,EVALUATE,Research,Tools and Practices,none,https://www.wikipedia.org
-Item,DISCOVER,Emerging Technologies,Products,down,https://www.google.ca
-Item,WATCH,Technology Prototyping,Products,down,https://www.wikipedia.org
-Item,PILOT,Solution Prototyping,Frameworks,none,https://www.google.ca
+Blockchain,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Blockchain?csf=1&web=1&e=0hsGUM
+Cloud Native,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Cloud%20Native?csf=1&web=1&e=eccSIb
+Data Science - Big Data,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Data%20Science%20-%20Big%20Data?csf=1&web=1&e=JtDqac
+Dev Ops Adoption,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/DevOps%20Adoption?csf=1&web=1&e=sWc6zN
+Immersive Technology (AR VR MR),WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Immersive%20Experience%20(AR%20VR%20MR)?csf=1&web=1&e=lVaosx
+Internet of Things,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Internet%20of%20Things?csf=1&web=1&e=2opizh
+Machine Learning,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Machine%20Learning?csf=1&web=1&e=CFrIUh
+Robotics,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Robotics?csf=1&web=1&e=5Bpg6D
+Smart Offices,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Smart%20Offices?csf=1&web=1&e=rnEKmZ
+Workflow Automation,WATCH,Emerging Technologies,Frameworks,none,https://014gc.sharepoint.com/:f:/r/sites/DGIIT-SARIITB-SABR/ETMS/Workflow%20Automation?csf=1&web=1&e=kVfwhZ
+,,,,,
+,,,,,
