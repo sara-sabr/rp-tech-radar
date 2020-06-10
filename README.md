@@ -18,6 +18,41 @@ This radar has been modified to be populated by inputting new data points
 into `/data.csv` rather than directly into the script within `/index.html`.
 The radar SVG has been placed into a webpage using the [Bootstrap](https://getbootstrap.com/) theme [Freelancer](https://startbootstrap.com/themes/freelancer/).
 
+# How to Update the Radar
+
+To update the topics on the Technology Radar, modify the file `/data.csv`. When updating `/data.csv` each row must be entered with the following format:
+
+**`name,ring,quadrant,category,moved,link`**
+  * **`name`** - Enter the name of the topic.
+  * **`ring`** - Choose between `WATCH`, `DISCOVER`, `EVALUATE`, or `PILOT`. 
+  * **`quadrant`** - Choose between `Research`, `Emerging Technologies`, `Technology Prototyping`, or `Solution Prototyping`.
+  * **`category`** - Choose between `Products`, `Platforms`, `Frameworks`, or `Tools and Practices`. 
+  * **`moved`** - Choose between `none` (new topic), `up` (moved closer to center), or `down` (moved further from center).
+  * **`link`** - Enter a hyperlink to the topic location.
+
+### Add Topic:
+
+To add a new topic to the radar, follow these steps:
+  1. Open the file `/data.csv`. 
+  2. Create a new line/row.
+  3. Enter the values of each column, following the above format. 
+  4. Save the file `/data.csv`.
+
+### Remove Topic:
+
+To remove an existing topic from the radar, follow these steps:
+  1. Open the file `/data.csv`.
+  2. Delete the desired row(s).
+  3. Save the file `/data.csv`.
+
+### Modify Topic:
+
+To modify an existing topic in the radar, follow these steps:
+  1. Open the file `/data.csv`. 
+  3. Edit the value(s) of the desired column(s), following the above format. 
+  4. Save the file `/data.csv`.
+  
+  
 ## License
 
 ```
