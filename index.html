@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -6,10 +7,18 @@
 <title>R&amp;P - Tech Radar</title>
 <link rel="shortcut icon" href="./img/RP_Logo_Icon.svg">
 
+<!-- Polyfill missing JS Functions -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script lang="JavaScript">
+  ES6Promise.polyfill();
+</script>
+<script src="js/fetch.umd.js"></script> -->
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <!-- <script src="http://zalando.github.io/tech-radar/release/radar-0.5.js"></script> -->
 <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
-	
+
 <script src="radar.js"></script>
 
 <link rel="stylesheet" href="radar.css">
@@ -48,13 +57,13 @@
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
           </li>
 
-          <!-- Nav item to navigate to "Français" hidden 
+          <!-- Nav item to navigate to "Français" hidden
                since there is no french version right now
 
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded" href="FR.html">Fran&ccedil;ais</a>
           </li>
-          
+
           -->
 
         </ul>
@@ -89,26 +98,26 @@
 
 
 
-    
+
 
 
 
 <!-- Radar Section -->
 
 <section id="radar" style="padding: 1rem 0;">
-<!-- 
+<!--
 ** I added padding above to not use the page-section class's default padding of 6rem
-** revert to below <section> if need be  
-<section class="page-section" id="radar"> 
+** revert to below <section> if need be
+<section class="page-section" id="radar">
 -->
 
-  <!-- Start of radar code   --> 
+  <!-- Start of radar code   -->
 
-  <!-- 
+  <!--
     The style and viewBox values used to be able to resize the radar to the window size responsively.
-    The viewBox values of 1450 and 1000 are the same dimensions as the radar_visualization width and height. 
+    The viewBox values of 1450 and 1000 are the same dimensions as the radar_visualization width and height.
     These values must remain the same as eachother.
-  --> 
+  -->
   <svg id="radar" style="display:block; margin:auto; width:100%; height:auto; max-width:1400px;" viewBox="0 0 1450 1000"></svg>
 
 <script>
@@ -118,21 +127,35 @@
   // -x- number of rings || requires much effort - advise against
   // -o- change dot colours || now colour per quadrant, not ring
   // -o- richer dots (more info around their borders, or diff shapes) || larger, hover actions
-  
-  // COOL BEANS! 
+
+  // COOL BEANS!
 
   // Fetch CSV data and call the function to draw the radar using CSV entries
-	fetch('./data.csv')
-    .then(function (resp) {
-        return resp.text();
-    })
-    .then(function (csv) {
-        var entries = d3.csvParse(csv, function (row) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4){
+
+        var entries = d3.csvParse(xhr.responseText, function (row) {
             return toEntry(row);
         });
         console.log("toto");
         draw_radar(entries);
-    });
+      }
+  };
+  xhr.open('GET', './data.csv');
+  xhr.send();
+
+	// fetch('./data.csv')
+  //   .then(function (resp) {
+  //       return resp.text();
+  //   })
+  //   .then(function (csv) {
+  //       var entries = d3.csvParse(csv, function (row) {
+  //           return toEntry(row);
+  //       });
+  //       console.log("toto");
+  //       draw_radar(entries);
+  //   });
 
 // Transform row in CSV into a radar entry
 function toEntry(row) {
@@ -151,7 +174,7 @@ function toEntry(row) {
     }
 }
 
-// New wrapper function to populate radar visualization with CSV data 	
+// New wrapper function to populate radar visualization with CSV data
 function draw_radar(my_entries) {
 
     // Zalando function to create radar canvas
@@ -189,7 +212,7 @@ function draw_radar(my_entries) {
 		{ name: "Frameworks",  color: "#0072c1" },
 		{ name: "Tools and Practices",  color: "#ff8500" }
     ],
-    
+
 	  print_layout: true,
 
     // Populate entries with CSV data entries instead of using original Zalando arrays
@@ -224,7 +247,7 @@ function draw_radar(my_entries) {
     <div class="row">
       <div class="text-center mt4">
         <p class="lead-noWeight text-center">
-          The Research & Prototyping Technology Radar is a list of trending industry technologies, 
+          The Research & Prototyping Technology Radar is a list of trending industry technologies,
           detailing how much attention and effort our team is devoting to them and how they align with our team's services.
           Each quadrant on the radar is represented by one of our team's <strong>four services:</strong>
         </p>
@@ -234,7 +257,7 @@ function draw_radar(my_entries) {
         <h4>Solution Prototyping Service</h4>
 
         <br>
-                
+
         <p class="lead-noWeight text-center">
           We use <strong>four rings</strong> with the following semantics:
         </p>
@@ -248,7 +271,7 @@ function draw_radar(my_entries) {
           <div class="grid-card">
             <h3 class="grid-card-header">PILOT</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
@@ -256,9 +279,9 @@ function draw_radar(my_entries) {
         <!-- About Item 2 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">EVALUATE</h3 class="grid-card-header">
+            <h3 class="grid-card-header">EVALUATE</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
@@ -266,9 +289,9 @@ function draw_radar(my_entries) {
         <!-- About Item 3 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">DISCOVER</h3 class="grid-card-header">
+            <h3 class="grid-card-header">DISCOVER</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
@@ -276,9 +299,9 @@ function draw_radar(my_entries) {
         <!-- About Item 4 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">WATCH</h3 class="grid-card-header">
+            <h3 class="grid-card-header">WATCH</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
@@ -290,42 +313,42 @@ function draw_radar(my_entries) {
         <table  style="margin:auto;">
           <tr>
           <td>
-          
+
           <h3>What is the Tech Radar?</h3>
-          
+
           <p>
           The Zalando Tech Radar is a list of technologies, complemented by an assessment result, called <em>ring assignment</em>. We use four rings with the following semantics:
           </p>
-          
+
           <ul>
           <li><strong>ADOPT</strong> &mdash; Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with a usage culture in our Zalando production environment, low risk and recommended to be widely used.</li>
           <li><strong>TRIAL</strong> &mdash; Technologies that we have seen work with success in project work to solve a real problem; first serious usage experience that confirm benefits and can uncover limitations. TRIAL technologies are slightly more risky; some engineers in our organization walked this path and will share knowledge and experiences.</li>
           <li><strong>ASSESS</strong> &mdash; Technologies that are promising and have clear potential value-add for us; technologies worth to invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have higher risks; they are often brand new and highly unproven in our organisation. You will find some engineers that have knowledge in the technology and promote it, you may even find teams that have started a prototyping effort.</li>
           <li><strong>HOLD</strong> &mdash; Technologies not recommended to be used for new projects. Technologies that we think are not (yet) worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can be continued for existing projects.</li>
           </ul>
-          
+
           </td><td>
-          
+
           <h3>What is the purpose?</h3>
-          
+
           <p>
           The Tech Radar is a tool to inspire and support engineering teams at Zalando to pick the best technologies for new projects; it provides a platform to share knowledge and experience in technologies, to reflect on technology decisions and continuously evolve our technology landscape. Based on the <a href="https://www.thoughtworks.com/radar">pioneering work of ThoughtWorks</a>, our Tech Radar sets out the changes in technologies that are interesting in software development &mdash; changes that we think our engineering teams should pay attention to and consider using in their projects.
           </p>
-          
+
           <h3>How do we maintain it?</h3>
-          
+
           <p>
           The Tech Radar is maintained by the <em>Zalando Technologists Guild</em> &mdash; an open group of  senior Zalando technologists committed to devote time to the Tech Radar purpose. The guild self organises to maintain the Tech Radar documents, including this public version. Assignment of technologies to rings is the outcome of ring change proposals, which are discussed and voted on in guild meetings. The Tech Radar depends on active participation and input from all engineering teams at Zalando.
           </p>
-          
+
           <p>
           There is also an <a href="https://techradar.zalando.net/">internal version of the Tech Radar</a> that contains background information about each technology &mdash; when to use it, pros and cons, main risks, which teams at Zalando are using it, and for what purpose.
           </p>
-          
+
           <p>
           <em>BTW, if you would like to create your own Tech Radar &mdash; we have <a href="https://github.com/zalando/tech-radar">open sourced the code</a> to generate this visualization.</em>
           </p>
-          
+
           </td></tr>
           </table>
         -->
@@ -336,7 +359,7 @@ function draw_radar(my_entries) {
 
 
 
-<!-- Portfolio Section 
+<!-- Portfolio Section
 <section class="page-section bg-primary text-white" id="portfolio">
   <div class="container">
 
@@ -357,7 +380,7 @@ function draw_radar(my_entries) {
         </script>
       </div>
     </div>
-  
+
   </div>
 </section>
 -->
@@ -379,7 +402,7 @@ function draw_radar(my_entries) {
         </div>
         <div class="divider-custom-line"></div>
       </div>
-		
+
 		<!-- Contact Section Content -->
       <div class="row">
         <div class="text-center mt4">

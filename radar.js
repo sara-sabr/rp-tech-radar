@@ -173,7 +173,9 @@ function radar_visualization(config) {
 
   // assign unique sequential id to each entry
   var id = 1;
-  for (var quadrant of [2,3,1,0]) {
+  var quadArray = [2,3,1,0];
+  for (var idx = 0; idx < quadArray.length; idx++) {
+    quadrant = quadArray[idx];
     for (var ring = 0; ring < 4; ring++) {
       var entries = segmented[quadrant][ring];
       entries.sort(function(a,b) { return a.label.localeCompare(b.label); })
@@ -234,7 +236,7 @@ function radar_visualization(config) {
       .style("opacity", "0.15")
       .style("stroke", config.colors.grid)
       .style("stroke-width", 2);
-  
+
   }
   for (var i = 0; i < rings.length; i++) {
     grid.append("circle")
@@ -246,7 +248,7 @@ function radar_visualization(config) {
       .style("stroke", config.colors.grid)
       // white ring thickness
       .style("stroke-width", 5);
-      // draw grid lines    
+      // draw grid lines
       grid.append("line")
         .attr("x1", 0).attr("y1", -400)
         .attr("x2", 0).attr("y2", 400)
@@ -261,7 +263,7 @@ function radar_visualization(config) {
         .style("stroke-width", 14);
   }
   // draw ring names
-  for (var i = 0; i < rings.length; i++) { 
+  for (var i = 0; i < rings.length; i++) {
     if (config.print_layout) {
       grid.append("text")
         .text(config.rings[i].name)
@@ -289,13 +291,12 @@ function radar_visualization(config) {
         .style("user-select", "none");
     }
   }
-  
 
-  
-  
-    
   // legend quad "boxes" placement on canvas
-  function legend_transform(quadrant, ring, index=null) {
+  function legend_transform(quadrant, ring, index) {
+    if (index == undefined) {
+      index = null;
+    }
     var dx = ring < 2 ? 0 : 120;
     var dy = (index == null ? -16 : index * 12);
     if (ring % 2 === 1) {
@@ -385,7 +386,7 @@ function radar_visualization(config) {
       .style("fill", "#888")
       .on("click", function() { window.open("https://www.google.com"); });
       */
-  
+
 
     // legend
     var legend = radar.append("g");
@@ -394,7 +395,7 @@ function radar_visualization(config) {
         .attr("transform", translate(
           legend_offset[quadrant].x,
           legend_offset[quadrant].y - 45
-        )) 
+        ))
         .text(config.quadrants[quadrant].name)
         .style("font-family", "Montserrat")
         .style("font-size", "20")
@@ -431,8 +432,8 @@ function radar_visualization(config) {
       }
     }
   }
-  
-  
+
+
 
   // layer for entries
   var rink = radar.append("g")
@@ -479,19 +480,19 @@ function radar_visualization(config) {
     }
   }
 
-  
+
   function blipOver(d) {
     var blip = document.getElementById("blip" + d.id);
     //blip.setAttribute("filter", "url(#solid)");
     blip.setAttribute("style", "opacity:1;");
 
     var blips = rink.selectAll(".blip")
-  } 
+  }
   function blipOut(d) {
     var blip = document.getElementById("blip" + d.id);
     //blip.removeAttribute("filter");
     blip.setAttribute("style", "opacity:1;");
-  } 
+  }
 
   function hideBubble(d) {
     var bubble = d3.select("#bubble")
@@ -526,7 +527,7 @@ function radar_visualization(config) {
         .on("mouseout", function(d) { hideBubble(d); unhighlightLegendItem(d); blipOut(d); })
        ;
 
-        
+
   // configure each blip
   blips.each(function(d) {
     var blip = d3.select(this)
@@ -534,7 +535,7 @@ function radar_visualization(config) {
     // blip link
     if (config.print_layout && d.active && d.hasOwnProperty("link")) {
       blip = blip.append("a")
-        .attr("xlink:href", d.link);      
+        .attr("xlink:href", d.link);
     }
 
     // blip shape
@@ -567,7 +568,7 @@ function radar_visualization(config) {
         .style("user-select", "none");
     }
   });
-  
+
 
   // make sure that blips stay inside their segment
   function ticked() {
