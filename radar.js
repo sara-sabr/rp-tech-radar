@@ -243,7 +243,7 @@ function radar_visualization(config) {
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", rings[i].radius)
-      .style("fill", "rgba(255, 255, 255, 1")
+      .style("fill", "rgba(255, 255, 255, 1)")
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
