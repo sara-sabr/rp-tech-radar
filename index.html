@@ -129,24 +129,11 @@
         var entries = d3.csvParse(xhr.responseText, function (row) {
             return toEntry(row);
         });
-        console.log("toto");
         draw_radar(entries);
       }
   };
   xhr.open('GET', './data.csv');
   xhr.send();
-
-	// fetch('./data.csv')
-  //   .then(function (resp) {
-  //       return resp.text();
-  //   })
-  //   .then(function (csv) {
-  //       var entries = d3.csvParse(csv, function (row) {
-  //           return toEntry(row);
-  //       });
-  //       console.log("toto");
-  //       draw_radar(entries);
-  //   });
 
 // Transform row in CSV into a radar entry
 function toEntry(row) {
