@@ -227,7 +227,9 @@ function radar_visualization(config) {
     .attr("in", "SourceGraphic");
 
   // draw rings
-  for (var i = 0; i < rings.length; i++) {
+  for (var i =  rings.length - 1; i >=0 ; i--) {
+
+    // Large circle
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
@@ -237,31 +239,33 @@ function radar_visualization(config) {
       .style("stroke", config.colors.grid)
       .style("stroke-width", 2);
 
-  }
-  for (var i = 0 ; i < rings.length ; i++) {
+    // White Ring
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", rings[i].radius)
-      .style("fill", "rgba(255, 255, 255, 1)")
+      .style("fill", "rgba(255, 255, 255, 0)")
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
       .style("stroke-width", 5);
-      // draw grid lines
-      grid.append("line")
-        .attr("x1", 0).attr("y1", -400)
-        .attr("x2", 0).attr("y2", 400)
-        .style("stroke", config.colors.grid)
-        // vertical axis thickness
-        .style("stroke-width", 14);
-      grid.append("line")
-        .attr("x1", -400).attr("y1", 0)
-        .attr("x2", 400).attr("y2", 0)
-        .style("stroke", config.colors.grid)
-        // hprizontal axis thickness
-        .style("stroke-width", 14);
+
+    //  draw grid lines
+    grid.append("line")
+      .attr("x1", 0).attr("y1", -400)
+      .attr("x2", 0).attr("y2", 400)
+      .style("stroke", config.colors.grid)
+      // vertical axis thickness
+      .style("stroke-width", 14);
+
+    grid.append("line")
+      .attr("x1", -400).attr("y1", 0)
+      .attr("x2", 400).attr("y2", 0)
+      .style("stroke", config.colors.grid)
+      // hprizontal axis thickness
+      .style("stroke-width", 14);
   }
+
   // draw ring names
   for (var i = 0; i < rings.length; i++) {
     if (config.print_layout) {
