@@ -238,7 +238,7 @@ function radar_visualization(config) {
       .style("stroke-width", 2);
 
   }
-  for (var i = rings.length - 1; i >=0 ; i--) {
+  for (var i = 0 ; i < rings.length ; i++) {
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
