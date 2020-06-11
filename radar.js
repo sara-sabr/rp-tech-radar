@@ -238,12 +238,12 @@ function radar_visualization(config) {
       .style("stroke-width", 2);
 
   }
-  for (var i = 0; i < rings.length; i++) {
+  for (var i = rings.length - 1; i >=0 ; i--) {
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", rings[i].radius)
-      .style("fill", "rgba(255, 255, 255, 0")
+      .style("fill", "rgba(255, 255, 255, 1")
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
