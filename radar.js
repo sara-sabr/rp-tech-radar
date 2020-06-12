@@ -452,8 +452,8 @@ function radar_visualization(config) {
     .style("pointer-events", "none")
     .style("user-select", "none");
   bubble.append("rect")
-    .attr("rx", 16)
-    .attr("ry", 16)
+    .attr("rx", 20)
+    .attr("ry", 20)
     //.style("fill", "#333");
   bubble.append("text")
     .style("font-family", "sans-serif")
@@ -474,12 +474,12 @@ function radar_visualization(config) {
         .style("opacity", 1);
       d3.select("#bubble rect")
         .attr("x", -15)
-        .attr("y", -bbox.height-4)
+        .attr("y", -bbox.height-2)
         .style("fill", d.color)
         .attr("width", bbox.width + 30)
         .attr("height", bbox.height + 14);
       d3.select("#bubble path")
-        .attr("transform", translate(bbox.width / 2 - 5, 8))
+        .attr("transform", translate(bbox.width / 2 - 5, 10))
         .style("fill", d.color);
     }
   }
@@ -507,7 +507,7 @@ function radar_visualization(config) {
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
     //legendItem.setAttribute("filter", "url(#solid)");
-    legendItem.setAttribute("style", "fill:" + d.color + "; font-weight:700; font-size:14px; cursor:pointer; user-select:none;");
+    legendItem.setAttribute("style", "fill:" + d.color + "; font-weight:700; font-size:12px; cursor:pointer; user-select:none;");
   }
 
   function unhighlightLegendItem(d) {
