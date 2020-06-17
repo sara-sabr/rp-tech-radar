@@ -121,7 +121,8 @@ function radar_visualization(config) {
     };
     var cartesian_max = {
       x: rings[3].radius * quadrants[quadrant].factor_x,
-      y: rings[3].radius * quadrants[quadrant].factor_y
+      //y: rings[3].radius * quadrants[quadrant].factor_y
+      y: rings[3].radius * quadrants[quadrant].factor_y + ((4-ring) * 90)
     };
     return {
       clipx: function(d) {
@@ -267,7 +268,7 @@ function radar_visualization(config) {
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
-      .style("stroke-width", 4);
+      .style("stroke-width", 2);
 
     //  draw grid lines
     /*grid.append("line")
@@ -341,7 +342,9 @@ function radar_visualization(config) {
       grid.append("text")
         .text(config.rings[i].name)
         .attr("x", 0)
-        .attr("y", -rings[i].radius + 136)
+        // commented out centers center ring title
+        //.attr("y", -rings[i].radius + 136)
+        .attr("y", -rings[i].radius + 70)
         .attr("text-anchor", "middle")
         .style("fill", "#fff")
         .style("font-family", "Montserrat")
@@ -377,13 +380,13 @@ function radar_visualization(config) {
         }
 
         dy = (index == null ? -16 : index * 12);
-        // changed "+ 36" to "- 18" (36 - 54) below for ring>0 (all but PROMOTE) to match ring=0 dy - 54 after hiding "Legend" title
+        // changed "+ 36" to "- 16" (36 - 52) below for ring>0 (all but PROMOTE) to match ring=0 dy - 52 after hiding "Legend" title
         // dy = dy + 36 + paddingLength * 12 + (ring - 1) * 40;
-        dy = dy - 18 + paddingLength * 12 + (ring - 1) * 40;
+        dy = dy - 16 + paddingLength * 12 + (ring - 1) * 40;
       }
       else {
         // moved dy for ring=0 (PROMOTE) up 54x after hiding "Legend" title
-        dy = dy - 54;
+        dy = dy - 52;
       }
     
     }
