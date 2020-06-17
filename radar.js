@@ -237,15 +237,26 @@ function radar_visualization(config) {
   // draw rings
   for (var i =  rings.length - 1; i >=0 ; i--) {
 
+    // Large circle (White BG)
+    grid.append("circle")
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", rings[i].radius)
+      .style("fill", "#fff")
+      .style("opacity", "1")
+      // .style("stroke", config.colors.grid)
+      // .style("stroke-width", 2);
+
     // Large circle
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", rings[i].radius)
-      .style("fill", "#0072c1")
-      .style("opacity", "0.15")
-      .style("stroke", config.colors.grid)
-      .style("stroke-width", 2);
+      //.style("fill", "#0072c1")
+      .style("fill", config.rings[i].color)
+      .style("opacity", "0.2")
+      // .style("stroke", config.colors.grid)
+      // .style("stroke-width", 2);
 
     // White Ring
     grid.append("circle")
@@ -256,7 +267,7 @@ function radar_visualization(config) {
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
-      .style("stroke-width", 5);
+      .style("stroke-width", 4);
 
     //  draw grid lines
     /*grid.append("line")
@@ -366,14 +377,18 @@ function radar_visualization(config) {
         }
 
         dy = (index == null ? -16 : index * 12);
-        dy = dy + 36 + paddingLength * 12 + (ring - 1) * 40;
+        // changed "+ 36" to "- 18" (36 - 54) below for ring>0 (all but PROMOTE) to match ring=0 dy - 54 after hiding "Legend" title
+        // dy = dy + 36 + paddingLength * 12 + (ring - 1) * 40;
+        dy = dy - 18 + paddingLength * 12 + (ring - 1) * 40;
       }
+      else {
+        // moved dy for ring=0 (PROMOTE) up 54x after hiding "Legend" title
+        dy = dy - 54;
+      }
+    
     }
 
-    /*
-    else if (ring > 1) {
-      dy = dy + 36 + segmented[quadrant][ring-2].length * 12
-    }*/
+
     // legend item placement on canvas
     return translate(
       legend_offset[quadrant].x + dx,
@@ -474,18 +489,20 @@ function radar_visualization(config) {
         ))
         //.text(config.quadrants[quadrant].name)
         //changed to "Legend" to override quadrant name in part to use only one legend "box"
-        .text("Legend")
-        .style("font-family", "Montserrat")
-        .style("font-size", "20")
-        .style("font-weight", "600")
-        .style("fill", config.quadrants[quadrant].color);
+        // !! ACTUALLY I just hid below - no real need to label "Legend"
+        // .text("Legend")
+        // .style("font-family", "Montserrat")
+        // .style("font-size", "20")
+        // .style("font-weight", "600")
+        // .style("fill", config.quadrants[quadrant].color);
       for (var ring = 0; ring < 4; ring++) {
         legend.append("text")
           .attr("transform", legend_transform(quadrant, ring))
           .text(config.rings[ring].name)
           .style("font-family", "Montserrat")
-          .style("font-size", "14")
-          .style("font-weight", "600");
+          .style("font-size", "18")
+          .style("font-weight", "600")
+          .style("fill", config.rings[ring].color);
         legend.selectAll(".legend" + quadrant + ring)
           .data(segmented[quadrant][ring])
           .enter()
