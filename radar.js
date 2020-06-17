@@ -176,7 +176,7 @@ function radar_visualization(config) {
     var entry = config.entries[i];
     //segmented[entry.quadrant][entry.ring].push(entry);
     segmented[2][entry.ring].push(entry);
-    
+
   }
 
   // assign unique sequential id to each entry
@@ -291,7 +291,7 @@ function radar_visualization(config) {
         .style("pointer-events", "none")
         .style("user-select", "none");
     }
-    
+
     if (config.print_layout) {
       grid.append("text")
         .text(config.rings[i].name)
@@ -354,7 +354,21 @@ function radar_visualization(config) {
     if (ring % 2 === 1) {
       dy = dy + 36 + segmented[quadrant][ring-1].length * 12;
     }
-//    console.log(quadrant + " -- " + ring + " dy -" + dy + " -- " + index);
+
+    // Special case for quadrant 2 as that the top left one for legend print out
+    if (quadrant == 2) {
+      dx = 0;
+
+      if (ring > 0) {
+        var paddingLength = 0;
+        for (var idx = 0; idx < ring; idx++) {
+          paddingLength += segmented[quadrant][idx].length;
+        }
+
+        dy = (index == null ? -16 : index * 12);
+        dy = dy + 36 + paddingLength * 12 + (ring - 1) * 40;
+      }
+    }
 
     /*
     else if (ring > 1) {
@@ -449,7 +463,7 @@ function radar_visualization(config) {
 
     // legend
     var legend = radar.append("g");
-    
+
     //for (var quadrant = 0; quadrant < 4; quadrant++) {
     //this (below) hides the all quadrant legends except top left.
     for (var quadrant = 2; quadrant < 3; quadrant++) {
