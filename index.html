@@ -110,7 +110,7 @@
     The viewBox values of 1450 and 1000 are the same dimensions as the radar_visualization width and height.
     These values must remain the same as eachother.
   -->
-  <svg id="radar" style="display:block; margin:auto; width:100%; height:850px; max-width:1400px;" viewBox="0 0 1450 900"></svg>
+  <svg id="radar" style="display:block; margin:auto; width:100%; height:auto; max-width:1400px;" viewBox="0 0 1450 900"></svg>
 <script>
 
   // -o- quick open url
@@ -162,7 +162,7 @@ function draw_radar(my_entries) {
 	  height: 900,
 	  colors: {
 		background: "#fff",
-    grid: "#fff",
+    grid: "#999999",
 		inactive: "#ddd"
 	  },
     title: "R&P - Tech Radar",
@@ -178,8 +178,8 @@ function draw_radar(my_entries) {
     // !! MOVED COLORS HERE - for while quadrants are "removed"
     rings: [
 		{ name: "PROMOTE",  color: "green" },
-		{ name: "ASSESS",  color: "red" },
-		{ name: "MONITOR",  color: "#0072c1" },
+		{ name: "ASSESS",  color: "#ff8500" },
+		{ name: "MONITOR",  color: "red" },
 		{ name: "HOLD",  color: "#777777" }
     ],
     // added categories below to match new column in CSV named 'category'
