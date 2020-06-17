@@ -110,7 +110,7 @@
     The viewBox values of 1450 and 1000 are the same dimensions as the radar_visualization width and height.
     These values must remain the same as eachother.
   -->
-  <svg id="radar" style="display:block; margin:auto; width:100%; height:900px; max-width:1400px;" viewBox="0 0 1450 1000"></svg>
+  <svg id="radar" style="display:block; margin:auto; width:100%; height:850px; max-width:1400px;" viewBox="0 0 1450 900"></svg>
 <script>
 
   // -o- quick open url
@@ -140,7 +140,7 @@ function toEntry(row) {
     return {
         label: row.name,
         quadrant: ['Solution Prototyping', 'Technology Prototyping', 'Research', 'Emerging Technologies'].indexOf(row.quadrant),
-        ring: ['PILOT', 'EVALUATE', 'DISCOVER', 'WATCH'].indexOf(row.ring),
+        ring: ['PROMOTE', 'ASSESS', 'MONITOR', 'HOLD'].indexOf(row.ring),
         // added 'category' here to pull new column also named 'category' from CSV
         // to add new category colours, create new name and color below in 'category' and in 'categories'
         // NOTE: be sure the listed order remains the same in both 'categories' and 'category'
@@ -159,7 +159,7 @@ function draw_radar(my_entries) {
     radar_visualization({
 	  svg_id: "radar",
 	  width: 1450,
-	  height: 1000,
+	  height: 900,
 	  colors: {
 		background: "#fff",
     grid: "#fff",
@@ -174,21 +174,24 @@ function draw_radar(my_entries) {
 		{ name: "Research" },
 		{ name: "Emerging Technologies" }
     ],
+    // old ring names: PILOT, EVALUATE, DISCOVER, WATCH
+    // !! MOVED COLORS HERE - for while quadrants are "removed"
     rings: [
-		{ name: "PILOT" },
-		{ name: "EVALUATE" },
-		{ name: "DISCOVER" },
-		{ name: "WATCH" }
+		{ name: "PROMOTE",  color: "green" },
+		{ name: "ASSESS",  color: "red" },
+		{ name: "MONITOR",  color: "#0072c1" },
+		{ name: "HOLD",  color: "#ff8500" }
     ],
     // added categories below to match new column in CSV named 'category'
     // moved colour values here to represent categories, not quadrant or rings
     // to add new category colours, create new name and color below in 'categories' and 'category' in toEntry(row)
     // NOTE: be sure the listed order remains the same in both 'categories' and 'category'
+    // !! REMOVED COLORS - for while quadrants are "removed"
     categories: [
-		{ name: "Products",  color: "green" },
-		{ name: "Platforms",  color: "red" },
-		{ name: "Frameworks",  color: "#0072c1" },
-		{ name: "Tools and Practices",  color: "#ff8500" }
+		{ name: "Products" },
+		{ name: "Platforms" },
+		{ name: "Frameworks" },
+		{ name: "Tools and Practices" }
     ],
 
 	  print_layout: true,
@@ -225,16 +228,16 @@ function draw_radar(my_entries) {
     <div class="row">
       <div class="text-center mt4">
         <p class="lead-noWeight text-center">
-          The Research & Prototyping Technology Radar is a list of trending industry technologies,
+          The Research & Prototyping Technology Radar is a list of emerging industry technologies,
           detailing how much attention and effort our team is devoting to them and how they align with our team's services.
-          Each quadrant on the radar is represented by one of our team's <strong>four services:</strong>
+          <!--Each quadrant on the radar is represented by one of our team's <strong>four services:</strong> 
         </p>
         <h4>Research Service</h4>
         <h4>Emerging Technology Watch Service</h4>
         <h4>Technology Prototyping Service</h4>
         <h4>Solution Prototyping Service</h4>
 
-        <br>
+        <br>-->
 
         <p class="lead-noWeight text-center">
           We use <strong>four rings</strong> with the following semantics:
@@ -247,40 +250,39 @@ function draw_radar(my_entries) {
         <!-- About Item 1 -->
 		    <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">PILOT</h3>
+            <h3 class="grid-card-header">PROMOTE</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Technologies in this ring have been assessed and deemed relevant and valuable to the organization.
             </p>
           </div>
         </div>
         <!-- About Item 2 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">EVALUATE</h3>
+            <h3 class="grid-card-header">ASSESS</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Analysis is actively being performed by the team to evaluate the potential of the technology 
+              and its relevance to the organization (ETAC, Primers, FAQs, …)
             </p>
           </div>
         </div>
         <!-- About Item 3 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">DISCOVER</h3>
+            <h3 class="grid-card-header">MONITOR</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              This ring is the entry point for our radar, an it's populated with emerging technologies 
+              that have been deemed promising and warrant further observation.
             </p>
           </div>
         </div>
         <!-- About Item 4 -->
         <div class="col-md-6">
           <div class="grid-card">
-            <h3 class="grid-card-header">WATCH</h3>
+            <h3 class="grid-card-header">HOLD</h3>
             <p class="grid-card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Technolgies listed in this ring have been observed by our team and deemed not currently 
+              relevant for further action.
             </p>
           </div>
         </div>
