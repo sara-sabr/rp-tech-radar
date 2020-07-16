@@ -244,7 +244,7 @@ function radar_visualization(config) {
       .attr("cy", 0)
       .attr("r", rings[i].radius)
       .style("fill", "#fff")
-      .style("opacity", "1")
+      .style("opacity", ".2")
       // .style("stroke", config.colors.grid)
       // .style("stroke-width", 2);
 
@@ -255,7 +255,7 @@ function radar_visualization(config) {
       .attr("r", rings[i].radius)
       //.style("fill", "#0072c1")
       .style("fill", config.rings[i].color)
-      .style("opacity", "0.2")
+      .style("opacity", ".15")
       // .style("stroke", config.colors.grid)
       // .style("stroke-width", 2);
 
