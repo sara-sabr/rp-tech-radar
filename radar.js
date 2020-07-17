@@ -121,7 +121,8 @@ function radar_visualization(config) {
     };
     var cartesian_max = {
       x: rings[3].radius * quadrants[quadrant].factor_x,
-      y: rings[3].radius * quadrants[quadrant].factor_y
+      //y: rings[3].radius * quadrants[quadrant].factor_y
+      y: rings[3].radius * quadrants[quadrant].factor_y + ((4-ring) * 90)
     };
     return {
       clipx: function(d) {
@@ -148,6 +149,10 @@ function radar_visualization(config) {
   // position each entry randomly in its segment
   for (var i = 0; i < config.entries.length; i++) {
     var entry = config.entries[i];
+
+    //this "bypasses" quadrants, instead allows dots to scatter around whole radar
+    entry.quadrant = i % 4;
+
     entry.segment = segment(entry.quadrant, entry.ring);
     var point = entry.segment.random();
     entry.x = point.x;
@@ -155,7 +160,9 @@ function radar_visualization(config) {
     entry.color = entry.active || config.print_layout ?
       // for blip colour to represent category in CSV, changed 'quadrants' and 'quadrant' to 'categories' and 'category' below
       // config.quadrants[entry.quadrant].color : config.colors.inactive;
-      config.categories[entry.category].color : config.colors.inactive;
+      //config.categories[entry.category].color : config.colors.inactive;
+      //changed to rings while categories/quadrants have been hidden for now
+      config.rings[entry.ring].color : config.colors.inactive;
   }
 
   // partition entries according to segments
@@ -168,7 +175,9 @@ function radar_visualization(config) {
   }
   for (var i=0; i<config.entries.length; i++) {
     var entry = config.entries[i];
-    segmented[entry.quadrant][entry.ring].push(entry);
+    //segmented[entry.quadrant][entry.ring].push(entry);
+    segmented[2][entry.ring].push(entry);
+
   }
 
   // assign unique sequential id to each entry
@@ -229,15 +238,26 @@ function radar_visualization(config) {
   // draw rings
   for (var i =  rings.length - 1; i >=0 ; i--) {
 
+    // Large circle (White BG)
+    grid.append("circle")
+      .attr("cx", 0)
+      .attr("cy", 0)
+      .attr("r", rings[i].radius)
+      .style("fill", "#fff")
+      .style("opacity", ".2")
+      // .style("stroke", config.colors.grid)
+      // .style("stroke-width", 2);
+
     // Large circle
     grid.append("circle")
       .attr("cx", 0)
       .attr("cy", 0)
       .attr("r", rings[i].radius)
-      .style("fill", "#6699cc")
-      .style("opacity", "0.15")
-      .style("stroke", config.colors.grid)
-      .style("stroke-width", 2);
+      //.style("fill", "#0072c1")
+      .style("fill", config.rings[i].color)
+      .style("opacity", ".15")
+      // .style("stroke", config.colors.grid)
+      // .style("stroke-width", 2);
 
     // White Ring
     grid.append("circle")
@@ -248,10 +268,10 @@ function radar_visualization(config) {
       .style("opacity", "1")
       .style("stroke", config.colors.grid)
       // white ring thickness
-      .style("stroke-width", 5);
+      .style("stroke-width", 2);
 
     //  draw grid lines
-    grid.append("line")
+    /*grid.append("line")
       .attr("x1", 0).attr("y1", -400)
       .attr("x2", 0).attr("y2", 400)
       .style("stroke", config.colors.grid)
@@ -264,10 +284,12 @@ function radar_visualization(config) {
       .style("stroke", config.colors.grid)
       // hprizontal axis thickness
       .style("stroke-width", 14);
+      */
   }
 
   // draw ring names
   for (var i = 0; i < rings.length; i++) {
+    /*
     if (config.print_layout) {
       grid.append("text")
         .text(config.rings[i].name)
@@ -281,6 +303,7 @@ function radar_visualization(config) {
         .style("pointer-events", "none")
         .style("user-select", "none");
     }
+
     if (config.print_layout) {
       grid.append("text")
         .text(config.rings[i].name)
@@ -289,12 +312,51 @@ function radar_visualization(config) {
         .attr("text-anchor", "middle")
         .style("fill", "#000")
         .style("font-family", "Montserrat")
-        .style("font-size", 12)
+        .style("font-size", 14)
         .style("font-weight", "bold")
+        .style("pointer-events", "none")
+        .style("user-select", "none");
+    }*/
+  }
+
+//ring titles in center, not axis
+
+  for (var i = 1; i < 4; i++) {
+    if (config.print_layout) {
+      grid.append("text")
+        .text(config.rings[i].name)
+        .attr("x", 0)
+        .attr("y", -rings[i].radius + 60)
+        .attr("text-anchor", "middle")
+        .style("fill", "#fff")
+        .style("font-family", "Montserrat")
+        .style("font-size", 30)
+        .style("font-weight", "bold")
+        .style("text-shadow", "0px 0px 3px #000")
         .style("pointer-events", "none")
         .style("user-select", "none");
     }
   }
+  for (var i = 0; i < 1; i++) {
+    if (config.print_layout) {
+      grid.append("text")
+        .text(config.rings[i].name)
+        .attr("x", 0)
+        // commented out centers center ring title
+        //.attr("y", -rings[i].radius + 136)
+        .attr("y", -rings[i].radius + 70)
+        .attr("text-anchor", "middle")
+        .style("fill", "#fff")
+        .style("font-family", "Montserrat")
+        .style("font-size", 30)
+        .style("font-weight", "bold")
+        .style("text-shadow", "0px 0px 3px #000")
+        .style("pointer-events", "none")
+        .style("user-select", "none");
+    }
+  }
+
+
 
   // legend quad "boxes" placement on canvas
   function legend_transform(quadrant, ring, index) {
@@ -306,6 +368,30 @@ function radar_visualization(config) {
     if (ring % 2 === 1) {
       dy = dy + 36 + segmented[quadrant][ring-1].length * 12;
     }
+
+    // Special case for quadrant 2 as that the top left one for legend print out
+    if (quadrant == 2) {
+      dx = 0;
+
+      if (ring > 0) {
+        var paddingLength = 0;
+        for (var idx = 0; idx < ring; idx++) {
+          paddingLength += segmented[quadrant][idx].length;
+        }
+
+        dy = (index == null ? -16 : index * 12);
+        // changed "+ 36" to "- 16" (36 - 52) below for ring>0 (all but PROMOTE) to match ring=0 dy - 52 after hiding "Legend" title
+        // dy = dy + 36 + paddingLength * 12 + (ring - 1) * 40;
+        dy = dy - 16 + paddingLength * 12 + (ring - 1) * 40;
+      }
+      else {
+        // moved dy for ring=0 (PROMOTE) up 54x after hiding "Legend" title
+        dy = dy - 52;
+      }
+    
+    }
+
+
     // legend item placement on canvas
     return translate(
       legend_offset[quadrant].x + dx,
@@ -344,6 +430,7 @@ function radar_visualization(config) {
       .style("font-size", "18");
 
     // color legend
+    /*
     radar.append("text")
       .attr("transform", translate(colorLegend_offset.x-400, title_offset.y-20))
       .attr("xml:space", "preserve")
@@ -377,7 +464,7 @@ function radar_visualization(config) {
       .style("font-weight", "500")
       .style("font-size", "20")
       .style("fill", config.categories[3].color);
-
+    */
 
     // toggle tabs ///////////////////////////////////////////////////////////////////////////////////////////
     /*
@@ -394,24 +481,31 @@ function radar_visualization(config) {
 
     // legend
     var legend = radar.append("g");
-    for (var quadrant = 0; quadrant < 4; quadrant++) {
+
+    //for (var quadrant = 0; quadrant < 4; quadrant++) {
+    //this (below) hides the all quadrant legends except top left.
+    for (var quadrant = 2; quadrant < 3; quadrant++) {
       legend.append("text")
         .attr("transform", translate(
           legend_offset[quadrant].x,
           legend_offset[quadrant].y - 45
         ))
-        .text(config.quadrants[quadrant].name)
-        .style("font-family", "Montserrat")
-        .style("font-size", "20")
-        .style("font-weight", "600")
-        .style("fill", config.quadrants[quadrant].color);
+        //.text(config.quadrants[quadrant].name)
+        //changed to "Legend" to override quadrant name in part to use only one legend "box"
+        // !! ACTUALLY I just hid below - no real need to label "Legend"
+        // .text("Legend")
+        // .style("font-family", "Montserrat")
+        // .style("font-size", "20")
+        // .style("font-weight", "600")
+        // .style("fill", config.quadrants[quadrant].color);
       for (var ring = 0; ring < 4; ring++) {
         legend.append("text")
           .attr("transform", legend_transform(quadrant, ring))
           .text(config.rings[ring].name)
           .style("font-family", "Montserrat")
-          .style("font-size", "14")
-          .style("font-weight", "600");
+          .style("font-size", "18")
+          .style("font-weight", "600")
+          .style("fill", config.rings[ring].color);
         legend.selectAll(".legend" + quadrant + ring)
           .data(segmented[quadrant][ring])
           .enter()
@@ -452,8 +546,8 @@ function radar_visualization(config) {
     .style("pointer-events", "none")
     .style("user-select", "none");
   bubble.append("rect")
-    .attr("rx", 16)
-    .attr("ry", 16)
+    .attr("rx", 20)
+    .attr("ry", 20)
     //.style("fill", "#333");
   bubble.append("text")
     .style("font-family", "sans-serif")
@@ -474,12 +568,12 @@ function radar_visualization(config) {
         .style("opacity", 1);
       d3.select("#bubble rect")
         .attr("x", -15)
-        .attr("y", -bbox.height-4)
+        .attr("y", -bbox.height-2)
         .style("fill", d.color)
         .attr("width", bbox.width + 30)
         .attr("height", bbox.height + 14);
       d3.select("#bubble path")
-        .attr("transform", translate(bbox.width / 2 - 5, 8))
+        .attr("transform", translate(bbox.width / 2 - 5, 10))
         .style("fill", d.color);
     }
   }
@@ -507,7 +601,7 @@ function radar_visualization(config) {
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
     //legendItem.setAttribute("filter", "url(#solid)");
-    legendItem.setAttribute("style", "fill:" + d.color + "; font-weight:700; font-size:14px; cursor:pointer; user-select:none;");
+    legendItem.setAttribute("style", "fill:" + d.color + "; font-weight:700; font-size:12px; cursor:pointer; user-select:none;");
   }
 
   function unhighlightLegendItem(d) {
