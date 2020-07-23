@@ -88,10 +88,28 @@
     </div>
   </header>
 
-
-
-
-
+<!-- This <style> tag is for IE fix to viewbox resizing problem-->
+<style>
+  canvas {
+      display: block;
+      width: 100%;
+      max-height:850px;
+      visibility: hidden;
+  }
+  svg {
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      text-align: center;
+      width: 100%;
+      height:auto;
+      max-width:1400px; 
+      max-height:850px;
+  }
+</style>
 
 
 <!-- Radar Section -->
@@ -105,12 +123,28 @@
 
   <!-- Start of radar code   -->
 
+  <!-- LEGACY START -->
   <!--
     The style and viewBox values used to be able to resize the radar to the window size responsively.
     The viewBox values of 1450 and 1000 are the same dimensions as the radar_visualization width and height.
     These values must remain the same as eachother.
   -->
-  <svg id="radar" style="display:block; margin:auto; width:100%; height:auto; max-width:1400px;" viewBox="0 0 1450 900"></svg>
+  <!-- height:auto; does not work properly in IE, changed to height:850px; 
+  <svg id="radar" style="display:block; margin:0 auto; width:100%; height:auto; max-width:1400px;" viewBox="0 0 1450 900"></svg>
+  -->
+  <!-- LEGACY END -->
+
+  <!-- 
+    Updated below for IE viebox resizing problem.
+    Created a <canvas> within a <div> to resize with the window.
+    The <svg> is placed in the same <div>.
+    The canvas will properly resize the width and height of the div, and the svg will follow and fill in the space.
+  -->
+  <div style="position:relative;width:100%;">
+    <canvas width="1400" height="900"></canvas>
+    <svg id="radar" viewBox="0 0 1450 900" preserveAspectRatio="xMaxYMax meet"></svg>
+  </div>
+
 <script>
 
   // -o- quick open url
